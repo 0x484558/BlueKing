@@ -13,8 +13,11 @@ fn main() {
 
     // generate_python_protos(&protoc_path);
 
+    let proto_path = std::path::PathBuf::from(PROTO_FILE).canonicalize().unwrap();
+    let proto_dir = proto_path.parent().unwrap();
+
     tonic_build::configure()
-        .compile_protos(&[PROTO_FILE], &["proto"])
+        .compile_protos(&[proto_path.as_path()], &[proto_dir])
         .expect("failed to compile protobuf definitions");
 
     println!("cargo:rerun-if-changed={}", PROTO_FILE);

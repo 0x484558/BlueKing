@@ -1,0 +1,6 @@
+description: >
+  Build a clear set of steps for the turtle to navigate from its current location
+  to the requested destination while avoiding hazards.
+expected_output: >
+  Step-by-step instructions in markdown with short paragraphs for each move.
+agent: turtle-agent

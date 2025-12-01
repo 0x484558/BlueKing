@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling", "hatch-protobuf"]
+build-backend = "hatchling.build"
+
+[project]
+name = "blueking"
+version = "0.1.2"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+
+dependencies = [
+    "crewai[tools]>=1.6.1",
+    "litellm",
+    "grpcio>=1.76.0",
+    "protobuf>=4.25.3",
+    "chromadb>=1.1.1",
+    "lmdb>=1.7.5",
+]
+
+[tool.uv]
+cache-keys = [
+    { file = "pyproject.toml" },
+]
+
+[tool.hatch.build.hooks.protobuf]
+dependencies = ["hatch-protobuf"]
+proto_paths = ["../proto"]
+output_path = "blueking"
+
+[tool.crewai]
+type = "crew"
+
+[project.scripts]
+kickoff = "blueking.main:kickoff"
+plot = "blueking.main:plot"
+
+[tool.basedpyright]
+include = ["blueking"]
+exclude = [".venv"]
+ignore = ["blueking/blueking_pb2.py", "blueking/blueking_pb2_grpc.py", "blueking/blueking_pb2.pyi"]
+typeCheckingMode = "recommended"
+reportMissingTypeStubs = "none"
+reportUnknownMemberType = "none"
+reportExplicitAny = "none"
+reportAny = "none"
+reportImportCycles = "none"
+reportPrivateUsage = "none"
+reportMissingModuleSource = "none"
+reportUnsupportedDunderAll = "none"
