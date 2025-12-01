@@ -1,0 +1,24 @@
+[package]
+name = "blueking"
+version = "0.2.0"
+edition = "2024"
+
+[dependencies]
+axum = { version = "0.7", features = ["ws"] }
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+reqwest = { version = "0.11", features = ["json"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1.0", features = ["v4"] }
+futures = "0.3"
+tonic = { version = "0.12", features = ["transport"] }
+prost = "0.13"
+pyo3 = { version = "0.27", features = ["auto-initialize"] }
+tower = { version = "0.5", features = ["util", "buffer"] }
+pin-project-lite = "0.2"
+
+[build-dependencies]
+tonic-build = "0.12"
+protoc-bin-vendored = "3.0"

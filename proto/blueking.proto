@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package blueking;
+
+message ChatEvent {
+  string username = 1;
+  string message = 2;
+}
+
+message ChatResponse {
+  string reply = 1;
+}
+
+message SendChatMessageRequest {
+  string payload = 1;
+}
+
+message SendChatMessageResponse {
+  enum Status {
+    OK = 0;
+    NO_CHAT_CLIENT = 1;
+    SEND_FAILED = 2;
+  }
+
+  Status status = 1;
+  string error_message = 2;
+}
+
+service Brain {
+  rpc Chat(ChatEvent) returns (ChatResponse);
+}
+
+service Gestalt {
+  rpc SendChatMessage(SendChatMessageRequest) returns (SendChatMessageResponse);
+}
+
+service Storage {
+
+}
